@@ -3,6 +3,7 @@ from PIL import Image
 import pillow_heif
 import io
 import base64
+import os
 
 app = Flask(__name__)
 pillow_heif.register_heif_opener()
@@ -31,5 +32,6 @@ def converter():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
